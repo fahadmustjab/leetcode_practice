@@ -1,8 +1,8 @@
 function containsDuplicate(nums: number[]): boolean {
-    const seen = new Set();
+    const numsHash = {};
     for (const num of nums) {
-        if (seen.has(num)) return true;
-        seen.add(num);
+        if (numsHash[num]) return true;
+        numsHash[num] = true;
     }
     return false;
 }
