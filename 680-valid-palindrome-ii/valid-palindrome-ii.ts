@@ -6,7 +6,6 @@ function validPalindrome(s: string): boolean {
         if (s[left] !== s[right] ) {
             const string1 = removeCharAt(s, left);
             const string2 = removeCharAt(s, right);
-            console.log(isPalindrome(string2));
             if(n<=3)return false;
             else if(isPalindrome(string1))return true;
             else if(isPalindrome(string2))return true;
