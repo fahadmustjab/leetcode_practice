@@ -1,10 +1,10 @@
 function lengthOfLongestSubstring(s: string): number {
-    let max=0,p=0;
-    let hashMap = {};
-
-    for(let i =0 ; i < s.length ;i++){
-        if(hashMap[s[i]]>-1){
-            p = Math.max(p,hashMap[s[i]]+1);
+    if(s.length <=1)return s.length;
+    let max = 0,hashMap = {},p=0;
+    for(let i =0; i< s.length;i++){
+        const prevChar = hashMap[s[i]];
+        if(prevChar >=p){
+            p = prevChar+1;
         }
         hashMap[s[i]] = i;
         max = Math.max(max,i-p+1);
