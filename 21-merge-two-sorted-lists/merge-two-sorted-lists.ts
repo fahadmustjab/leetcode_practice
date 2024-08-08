@@ -13,6 +13,12 @@
 function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): ListNode | null {
     let dummy: ListNode = new ListNode(0);
     let merged = dummy;
+    if(list1 === null){
+        return list2;
+    }
+    if(list2 === null){
+        return list1
+    }
     while ((list1 && list2) ) {
         if (list1.val < list2.val) {
             merged.next = new ListNode(list1.val);
