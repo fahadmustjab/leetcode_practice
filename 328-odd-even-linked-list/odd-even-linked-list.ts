@@ -12,8 +12,8 @@
 
 function oddEvenList(head: ListNode | null): ListNode | null {
     if(!head || !head.next)return head;
-    let odd=head,even=head.next,current=head;
-    let oddHead=odd,evenHead=even;
+    let odd=head,even=head.next;
+    let evenHead=even;
 
     while(odd?.next && even?.next){
         odd.next=even.next;
