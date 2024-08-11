@@ -38,16 +38,3 @@ function reorderList(head: ListNode | null): void {
         first=tmp1;
     }
 };
-
-function reverseList(head: ListNode | null){
-    let next: ListNode | null = null;
-    let prev: ListNode | null = null;
-    let current: ListNode | null = head;
-    while(current){
-        next=current.next;
-        current.next=prev;
-        prev=current;
-        current=next;
-    }
-    return prev;
-}
