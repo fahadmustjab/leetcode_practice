@@ -1,12 +1,12 @@
 function findMaxConsecutiveOnes(nums: number[]): number {
-    let n = nums.length, l = 0, r = 0, max = 0;
-    while (r < n) {
-        if (nums[r] === 1) {
-            max = Math.max(max, r - l + 1);
-        } else {
-            l=r+1;
+    let n = nums.length, max = 0, maxHere = 0;
+    for (let i = 0; i < n; i++) {
+        if (nums[i] === 1) {
+            max = Math.max(max,maxHere+1);
+            maxHere++;
+        }else{
+            maxHere=0;
         }
-        r++;
     }
     return max;
 };
