@@ -1,24 +1,19 @@
 function evalRPN(tokens: string[]): number {
-    const stack: number[] = [];
-
-    for (let i = 0; i < tokens.length; i++) {
-        const token = tokens[i];
-        
-        if (["+", "-", "*", "/"].includes(token)) {
-            const a = stack.pop()!;
-            const b = stack.pop()!;
-            let result: number;
-
-            if (token === "+") result = b + a;
-            else if (token === "-") result = b - a;
-            else if (token === "*") result = b * a;
-            else result = Math.trunc(b / a); // Use Math.trunc to avoid floating-point issues
-
+    let stack: number[] = [];
+    let result = 0;
+    for(let i =0; i <tokens.length; i++){
+        if(["+","-","*","/"].includes(tokens[i])){
+            let a = stack.pop() ;
+            let b = stack.pop() ;
+            console.log(a,b);
+            if(tokens[i] === "+")result=a+b;
+            else if(tokens[i] === "-")result = b-a;
+            else if(tokens[i] === "*")result = a*b;
+            else if(tokens[i] === "/")result = Math.trunc(b / a);
             stack.push(result);
-        } else {
-            stack.push(Number(token));
+        }else{
+            stack.push(Number(tokens[i]));
         }
-    }
-
-    return stack.pop()!;
-}
+    }  
+    return stack[stack.length-1];
+};
