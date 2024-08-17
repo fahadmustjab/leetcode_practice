@@ -18,26 +18,23 @@
 
 function flatten(head: _Node | null): _Node | null {
     let merged = head;
-    let dummy = merged;
     while (merged) {
-        let child = merged.child;
-        let next = merged.next;
-        if (child) {
-            merged.next = child;
-            child.prev = merged;
-            merged.child = null;
-            while (child.next) {
-                child = child.next;
+        if (merged.child) {
+            let next = merged.next;
+            merged.next=merged.child;
+            merged.next.prev=merged;
+            merged.child=null;
+            let p = merged.next;
+            while(p.next){
+                p=p.next;
             }
-
-            if (next) {
-                child.next = next;
-                next.prev = child;
+            p.next=next;
+            if(next){
+                next.prev=p;
             }
         }
-
         merged = merged.next;
     }
-    return dummy;
+    return head;
 
 }
