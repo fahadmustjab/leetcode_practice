@@ -1,7 +1,6 @@
 function minRemoveToMakeValid(s: string): string {
     let t = s.split('');
     let stack = [];
-    console.log(t);
     for (let i = 0; i < t.length; i++) {
         let char = t[i];
         if (char === '(') {
