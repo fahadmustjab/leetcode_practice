@@ -11,8 +11,6 @@
  */
 
 function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): ListNode | null {
-    let dummy: ListNode | null = new ListNode(0);
-    let merged: ListNode | null = dummy;
     if(list1 === null){
         return list2;
     }
