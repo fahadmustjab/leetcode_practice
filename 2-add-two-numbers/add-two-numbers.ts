@@ -11,21 +11,11 @@
  */
 
 function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | null {
-    if(!l1)return l2;
-    if(!l2)return l1;
-    let dummy: ListNode = new ListNode(0);
-    let sum: ListNode = dummy;
-    let carry = 0
-    while(l1 || l2){
-        let sumNum = (l1?.val || 0) + (l2?.val || 0)+ carry;
-        carry = Math.floor(sumNum /10);
-        sum.next=new ListNode(sumNum%10);
-        if(l1)l1=l1.next;
-        if(l2)l2=l2.next;
-        sum=sum.next;
+    const addTowNumbersUtil = (l1: ListNode | null, l2: ListNode | null, carry: number) => {
+        if (!l1 && !l2 && !carry) return null;
+        const total = (l1?.val ?? 0) + (l2?.val ?? 0) + (carry || 0);
+        carry = parseInt(total / 10 + '');
+        return new ListNode(total % 10, addTowNumbersUtil(l1?.next, l2?.next, carry));
     }
-    if(carry){
-        sum.next=new ListNode(carry);
-    }
-    return dummy.next;
+    return addTowNumbersUtil(l1,l2,0);
 };
