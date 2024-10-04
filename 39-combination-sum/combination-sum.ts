@@ -1,25 +1,21 @@
 function combinationSum(candidates: number[], target: number): number[][] {
-    const result: number[][] = [];
-    const n = candidates.length;
-    const backtrack = (i: number, subset: number[], target: number) => {
-        if (target < 0) {
+    candidates.sort((a, b) => a - b);
+    const ans: number[][] = [];
+    const t: number[] = [];
+    const dfs = (i: number, s: number) => {
+        if (s === 0) {
+            ans.push(t.slice());
             return;
         }
-        if (i > n - 1) {
-            if (target === 0) {
-                result.push([...subset]);
-            }
+        if (s < candidates[i]) {
             return;
         }
-
-
-        if (candidates[i] <= target) {
-            subset.push(candidates[i]);
-            backtrack(i, subset, target - candidates[i]);
-            subset.pop();
+        for (let j = i; j < candidates.length; ++j) {
+            t.push(candidates[j]);
+            dfs(j, s - candidates[j]);
+            t.pop();
         }
-        backtrack(i + 1, subset, target);
-    }
-    backtrack(0, [], target);
-    return result;
-};
+    };
+    dfs(0, target);
+    return ans;
+}
