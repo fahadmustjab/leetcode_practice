@@ -4,7 +4,7 @@ function combinationSum2(candidates: number[], target: number): number[][] {
     const n: number = candidates.length;
     candidates.sort((a, b) => a - b);
 
-    const dfs = (i: number, target: number, subset: number[]) => {
+    function dfs(i: number, target: number, subset: number[]) {
         if (target < 0) return;
         if (target === 0) {
             result.push([...subset]);
@@ -20,5 +20,5 @@ function combinationSum2(candidates: number[], target: number): number[][] {
         }
     }
     dfs(0, target, []);
-    return Array.from(result.values());
+    return result;
 };
