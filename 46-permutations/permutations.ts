@@ -1,23 +1,21 @@
 function permute(nums: number[]): number[][] {
-    const result: number[][] = [];
-    const n = nums.length;
-    function permute(ind: number, perms: number[], map: Map<number, boolean>) {
-        if (perms.length === n) {
-            result.push([...perms]);
+    let n: number = nums.length,result: number[][] = [];
+    function backtrack(index: number){
+        if(index >= nums.length){
+            result.push([...nums]);
+            // console.log(nums);
             return;
         }
-
-        for (let i = 0; i < n; i++) {
-            if (!map.get(nums[i])) {
-                perms.push(nums[i]);
-                map.set(nums[i], true);
-                permute(i + 1, perms, map);
-                perms.pop();
-                map.set(nums[i], false);
-            }
+        for(let i = index;i < n;i++){
+            swap(nums,i,index);
+            backtrack(index+1);
+            swap(nums,i,index);
         }
     }
-    const map: Map<number, boolean> = new Map();
-    permute(0, [], map);
+    backtrack(0);
     return result;
 };
+
+function swap(nums: number[], i: number, j: number) {
+    [nums[i], nums[j]] = [nums[j], nums[i]];
+}
