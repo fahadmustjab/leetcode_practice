@@ -2,19 +2,21 @@ function minFallingPathSum(matrix: number[][]): number {
     const m = matrix.length;
     const n = matrix[0].length;
     let MAX_INT = Number.MAX_SAFE_INTEGER;
-    let dp = new Array(m).fill(0).map(() => Array(n).fill(0));
+    let prev = new Array(n).fill(0);
 
-    for(let i =0;i < n;i++ ){
-        dp[0][i] = matrix[0][i];
+    for (let i = 0; i < n; i++) {
+        prev[i] = matrix[0][i];
     }
 
-    for(let i =1;i< m;i++){
-        for(let j =0; j < n;j++){
-            const down = dp[i-1][j];
-            const right = j < n- 1 ? dp[i-1][j+1]: MAX_INT ;
-            const left = j > 0 ? dp[i-1][j-1]: MAX_INT;
-            dp[i][j] = matrix[i][j] + Math.min(down,right,left);
+    for (let i = 1; i < m; i++) {
+        let cur = new Array(n).fill(0);
+        for (let j = 0; j < n; j++) {
+            const down = prev[j];
+            const right = j < n - 1 ? prev[j + 1] : MAX_INT;
+            const left = j > 0 ? prev[j - 1] : MAX_INT;
+            cur[j] = matrix[i][j] + Math.min(down, right, left);
         }
+        prev=cur;
     }
-    return Math.min(...dp[m-1]);
+    return Math.min(...prev);
 };
