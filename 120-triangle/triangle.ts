@@ -6,9 +6,9 @@ function minimumTotal(triangle: number[][]): number {
             return triangle[m - 1][j];
         }
         if (dp[i][j] != -1) return dp[i][j];
-        const left = backtrack(i + 1, j);
-        const up = backtrack(i + 1, j + 1);
-        return dp[i][j] = triangle[i][j] + Math.min(left, up);
+        const down = backtrack(i + 1, j);
+        const diagonal = backtrack(i + 1, j + 1);
+        return dp[i][j] = triangle[i][j] + Math.min(down, diagonal);
     }
     return backtrack(0, 0);
 };
