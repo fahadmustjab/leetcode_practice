@@ -10,8 +10,8 @@ function minPathSum(grid: number[][]): number {
                 dp[0][0] = grid[i][j];
             } else {
                 const left = grid[i][j] + ( i > 0 ? dp[i - 1][j]: Number.MAX_SAFE_INTEGER);
-                const right = grid[i][j] + (j > 0 ?  dp[i][j - 1]: Number.MAX_SAFE_INTEGER);
-                dp[i][j] = Math.min(left, right);
+                const up = grid[i][j] + (j > 0 ?  dp[i][j - 1]: Number.MAX_SAFE_INTEGER);
+                dp[i][j] = Math.min(left, up);
             }
 
         }
