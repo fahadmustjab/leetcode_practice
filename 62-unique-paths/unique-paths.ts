@@ -1,15 +1,24 @@
 function uniquePaths(m: number, n: number): number {
     const dp = new Array(m);
-    for(let i =0;i < m;i++){
+    for (let i = 0; i < m; i++) {
         dp[i] = new Array(n).fill(-1);
     }
-    function backtrack(i: number, j: number) {
-        if (i === 0 && j === 0)return 1;
-        if (i < 0 || j < 0) return 0;
-        if(dp[i][j] != -1)return dp[i][j];
-        const a = backtrack(i - 1, j);
-        const b = backtrack(i, j - 1);
-        return dp[i][j] = a + b;
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            let up = 0, left = 0;
+            if (i === 0 && j === 0) {
+                dp[0][0] = 1;
+            } else {
+                if (i > 0) {
+                    up = dp[i - 1][j]
+                }
+                if (j > 0) {
+                    left = dp[i][j - 1];
+                }
+                dp[i][j] = up + left;
+            }
+
+        }
     }
-    return backtrack(m - 1, n - 1);
+    return dp[m - 1][n - 1];
 };
