@@ -1,21 +1,23 @@
 function canPartition(nums: number[]): boolean {
     const n: number = nums.length;
-    const totalSum = nums.reduce((acc, num) => acc + num, 0);
-    if (totalSum % 2 != 0) return false;
-    const partition = totalSum / 2;
-    const dp: boolean[][] = Array.from({ length: n }, () => Array(partition + 1).fill(false));
-    for (let i = 0; i < n; i++) {
-        dp[i][0] = true;
-    }
-    if (nums[0] <= partition) {
-        dp[0][nums[0]] = true;
-    }
-    for (let i = 1; i < n; i++) {
-        for (let target = 0; target <= partition; target++) {
-            const take = (target >= nums[i]) ? dp[i - 1][target - nums[i]] : false;
-            const notTake = dp[i - 1][target];
-            dp[i][target] = take || notTake;
+    let sum = nums.reduce((a, b) => a + b, 0);
+
+    // If the total sum is odd, it's impossible to partition it into two equal subsets
+    if (sum % 2 !== 0) return false;
+
+    const target = sum / 2;
+
+    // DP array to keep track of possible sums
+    const dp: boolean[] = Array(target + 1).fill(false);
+    dp[0] = true; // A sum of 0 is always possible (empty subset)
+
+    // Traverse through the numbers and update the DP array
+    for (const num of nums) {
+        for (let t = target; t >= num; t--) {
+            dp[t] = dp[t] || dp[t - num];
         }
     }
-    return dp[n - 1][partition];
-};
+
+    // The result will be whether it's possible to sum up to target
+    return dp[target];
+}
