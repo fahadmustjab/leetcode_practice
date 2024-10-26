@@ -1,16 +1,8 @@
 function countBits(n: number): number[] {
-    let count: number[] = [];
+    let count = Array(n+1).fill(0);
     for (let i = 0; i <= n; i++) {
-        count.push(util(i));
+        count[i] = count[i >> 1] + (i & 1);
     }
     return count;
 };
 
-function util(i: number) {
-    let count = 0;
-    while (i != 0) {
-        i = i & (i - 1);
-        count++;
-    }
-    return count;
-}
