@@ -1,22 +1,13 @@
 function plusOne(digits: number[]): number[] {
-    let n = digits.length-1,carry=1;
-    let result = [];
-    while(n>=0 ){
-        let sum = digits[n]+carry;
-        digits[n] = sum%10;
-        result.push(digits[n]);
-        carry = Math.floor(sum/10);
-        n--;
-
+    let n = digits.length;
+    for (let i = n - 1; i >= 0; i--) {
+        if (digits[i] < 9) {
+            digits[i] = digits[i] + 1;
+            return digits;
+        }
+        digits[i] = 0;
     }
-    if(carry){
-        result.push(carry);
-    }
-    let l = 0,r=result.length-1;
-    while(l < r){
-        [result[l],result[r]] = [result[r],result[l]];
-        r--;
-        l++;
-    }
-    return result;
+    let newArray = Array(n+1).fill(0);
+    newArray[0] = 1;
+    return newArray;
 };
