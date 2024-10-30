@@ -9,5 +9,6 @@ function plusOne(digits: number[]): number[] {
     }
     let newArray = Array(n+1).fill(0);
     newArray[0] = 1;
+    console.log(newArray);
     return newArray;
 };
