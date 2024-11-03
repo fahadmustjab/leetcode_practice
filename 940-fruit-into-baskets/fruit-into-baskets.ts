@@ -3,7 +3,7 @@ function totalFruit(fruits: number[]): number {
     let r = 0, max = 0, l = 0;
     while (r < n) {
         myMap.set(fruits[r],(myMap.get(fruits[r]) ?? 0)+1);
-        while (myMap.size > k) {
+        if (myMap.size > k) {
             myMap.set(fruits[l], myMap.get(fruits[l]) - 1);
             if (myMap.get(fruits[l]) == 0) {
                 myMap.delete(fruits[l]);
