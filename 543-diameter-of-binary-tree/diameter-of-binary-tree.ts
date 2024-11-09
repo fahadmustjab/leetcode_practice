@@ -13,15 +13,15 @@
  */
 
 function diameterOfBinaryTree(root: TreeNode | null): number {
-    if (root === null) return 0;
-    const left = height(root.left);
-    const right = height(root.right);
-    const d1 = diameterOfBinaryTree(root.left);
-    const d2 = diameterOfBinaryTree(root.right);
-    return Math.max(left + right, Math.max(d1, d2));
+    let maximum = 0;
+    function height(root: TreeNode | null): number {
+        if (root === null) return 0;
+        const lh = height(root.left);
+        const rh = height(root.right);
+        maximum = Math.max(maximum, lh + rh);
+        return 1 + Math.max(lh, rh);
+    }
+    height(root);
+    return maximum;
 };
 
-function height(root: TreeNode | null): number {
-    if (root === null) return 0;
-    return 1 + Math.max(height(root.left), height(root.right));
-}
