@@ -1,22 +1,21 @@
-/**
- * Definition for a binary tree node.
- * class TreeNode {
- *     val: number
- *     left: TreeNode | null
- *     right: TreeNode | null
- *     constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
- *         this.val = (val===undefined ? 0 : val)
- *         this.left = (left===undefined ? null : left)
- *         this.right = (right===undefined ? null : right)
- *     }
- * }
- */
-
 function maxDepth(root: TreeNode | null): number {
-    if(root === null){
-        return 0;
+    if (root === null) return 0;
+    
+    const queue = [root];
+    let count = 0;
+    
+    while (queue.length > 0) {
+        let levelSize = queue.length;
+        
+        for (let i = 0; i < levelSize; i++) {
+            const node = queue.shift();
+            
+            if (node.left) queue.push(node.left);
+            if (node.right) queue.push(node.right);
+        }
+        
+        count++;
     }
-    const left = 1+ maxDepth(root.left);
-    const right = 1+ maxDepth(root.right);
-    return Math.max(left,right);
-};
+    
+    return count;
+}
