@@ -27,11 +27,9 @@ function zigzagLevelOrder(root: TreeNode | null): number[][] {
             queue.dequeue();
             if (node === null) continue;
 
-            if (flipBit) {
-                array.unshift(node.val);
-            } else {
-                array.push(node.val);
-            }
+            let index = flipBit ? size - i - 1 : i;
+            array[index] = node.val;
+
             if (node.left) queue.push(node.left);
             if (node.right) queue.push(node.right);
         }
