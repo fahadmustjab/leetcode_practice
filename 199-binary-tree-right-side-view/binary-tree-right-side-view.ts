@@ -13,21 +13,16 @@
  */
 
 function rightSideView(root: TreeNode | null): number[] {
-    const result: number[] = [];
-    if(!root)return result;
-    const queue = new Queue();
-    queue.push(root);
-    while(!queue.isEmpty()){
-        const size =  queue.size();
-        let array = [];
-        for(let i =0;i < size;i++){
-            const node = queue.front();
-            queue.dequeue();
-            array.push(node.val);
-            if(node.left)queue.push(node.left);
-            if(node.right)queue.push(node.right);
+    if (root === null) return [];
+    const result = [];
+    function reversePreOrder(root: TreeNode | null, level: number){
+        if(root === null){
+            return;
         }
-        result.push(array[size-1]);
+        if(level === result.length)result.push(root.val);
+        reversePreOrder(root.right,level+1);
+        reversePreOrder(root.left,level+1);
     }
+    reversePreOrder(root,0);
     return result;
 };
