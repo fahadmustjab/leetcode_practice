@@ -1,10 +1,13 @@
 function majorityElement(nums: number[]): number {
-    const map = new Map();
-    for (let i = 0; i < nums.length; i++) {
-        map.set(nums[i], (map.get(nums[i]) ?? 0) + 1);
-        if (map.get(nums[i]) > Math.floor(nums.length / 2)) {
-            return nums[i];
+    let majorityNumber = nums[0], count = 1, n = nums.length;
+    for (let i = 1; i < n; i++) {
+        if (count === 0) {
+            count++;
+            majorityNumber = nums[i];
+        } else if (nums[i] === majorityNumber) count++;
+        else {
+            count--;
         }
     }
-    return -1;
+    return majorityNumber;
 };
