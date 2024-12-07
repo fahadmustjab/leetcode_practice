@@ -7,23 +7,38 @@ class MinStack {
 
     push(val: number): void {
         if (this.stack.length === 0) {
-            this.stack.push([val, val])
+            this.stack.push(val);
+            this.min = val;
         } else {
-            this.stack.push([val, Math.min(val, this.stack[this.stack.length - 1][1])]);
-
+            if (val < this.min) {
+                this.stack.push(2 * val - this.min);
+                this.min = val;
+            } else {
+                this.stack.push(val);
+            }
         }
     }
 
     pop(): void {
+        const x = this.stack[this.stack.length - 1];
         this.stack.pop();
+        if (x < this.min) {
+            this.min = 2 * this.min - x;
+        }
     }
 
     top(): number {
-        return this.stack[this.stack.length - 1][0];
+        let x = this.stack[this.stack.length - 1];
+        if (x < this.min) {
+            return this.min;
+        } else {
+            return x;
+
+        }
     }
 
     getMin(): number {
-        return this.stack[this.stack.length - 1][1]
+        return this.min
     }
 }
 
