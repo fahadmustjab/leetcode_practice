@@ -1,19 +1,19 @@
 function evalRPN(tokens: string[]): number {
     let stack: number[] = [];
-    let result = 0;
-    for(let i =0; i <tokens.length; i++){
-        if(["+","-","*","/"].includes(tokens[i])){
-            let a = stack.pop() ;
-            let b = stack.pop() ;
-            console.log(a,b);
-            if(tokens[i] === "+")result=a+b;
-            else if(tokens[i] === "-")result = b-a;
-            else if(tokens[i] === "*")result = a*b;
-            else if(tokens[i] === "/")result = Math.trunc(b / a);
-            stack.push(result);
-        }else{
-            stack.push(Number(tokens[i]));
+    for (const char of tokens) {
+        if (["+", "-", "*", "/"].includes(char)) {
+            const a = stack.pop();
+            const b = stack.pop();
+            let ans;
+            if (char === '+') ans = a + b;
+            else if (char === "-") ans = b - a;
+            else if (char === "*") ans = a * b;
+            else ans = Math.trunc(b / a);
+
+            stack.push(Number(ans));
+        } else {
+            stack.push(Number(char));
         }
-    }  
-    return stack[stack.length-1];
+    }
+    return stack.pop();
 };
