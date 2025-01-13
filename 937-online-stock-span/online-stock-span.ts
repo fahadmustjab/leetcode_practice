@@ -1,20 +1,19 @@
 class StockSpanner {
     temp;
+    stack;
     constructor() {
         this.temp = [];
+        this.stack = [];
     }
 
     next(price: number): number {
-        let count = 1;
         this.temp.push(price);
-        for(let i=this.temp.length-2;i>=0;i--){
-            if(this.temp[i] <= price){
-                count++;
-            }else{
-                break;
-            }
+        while (this.stack.length > 0 && this.temp[this.stack[this.stack.length - 1]] <= price) {
+            this.stack.pop();
         }
-        return count;
+        const span = this.stack.length === 0 ? this.temp.length : this.temp.length - this.stack[this.stack.length - 1] - 1;
+        this.stack.push(this.temp.length-1);
+        return span;
     }
 }
 
