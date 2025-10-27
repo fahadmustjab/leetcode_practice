@@ -6,6 +6,5 @@ function tribonacci(n: number): number {
     for(let i = 3; i<=n;i++){
         dp[i] = dp[i-1] + dp[i-2] + dp[i-3];
     }
-    console.log('here');
     return dp[n];
 };
