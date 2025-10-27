@@ -1,8 +1,11 @@
 function climbStairs(n: number): number {
     if (n <= 1) return 1;
-    const dp = Array(n).fill(1);
+    let prev = 1;
+    let next = 1;
     for(let i =2; i<=n;i++){
-        dp[i] = dp[i-1] + dp[i-2];
+        const current = next + prev;
+        prev = next;
+        next = current;
     }
-    return dp[n];
+    return next;
 };
